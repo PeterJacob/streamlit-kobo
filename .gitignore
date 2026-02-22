@@ -1,0 +1,13 @@
+# Secrets
+.streamlit/secrets.toml
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Generated files
+tts_output/
+
+# macOS
+.DS_Store
