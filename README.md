@@ -10,7 +10,7 @@ A Streamlit app to aid language learning by bridging your Kobo e-reader, DeepL, 
 app.py                         # Native desktop launcher (PyWebView)
 main.py                        # Streamlit app (UI and orchestration)
 anki_export.py                 # AnkiConnect integration
-setup_py2app.py                # py2app bundling config
+create_app_bundle.sh           # Script to create macOS .app bundle
 kobo_date.txt                  # Timestamp of last successful export
 .streamlit/secrets.toml        # API keys and config (not in repo)
 .streamlit/secrets.toml.example  # Template for secrets.toml
@@ -74,13 +74,12 @@ tts_output/                    # Generated MP3 files (not in repo)
 To create a standalone `.app` you can put in your Applications folder or Dock:
 
 ```
-uv pip install py2app
-python setup_py2app.py py2app
+bash create_app_bundle.sh
 ```
 
-The `.app` bundle will be created in the `dist/` directory.
+The `.app` bundle will be created in the `dist/` directory. It's a thin wrapper that calls `uv run python app.py` from the project directory, so the venv must remain in place.
 
-To add a custom icon, place an `icon.icns` file in the project root and uncomment the `iconfile` line in `setup_py2app.py`.
+To add a custom icon, place an `icon.icns` file in the project root before running the script.
 
 ## Usage
 
