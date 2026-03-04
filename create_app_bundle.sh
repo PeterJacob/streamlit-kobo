@@ -13,11 +13,12 @@ rm -rf "$APP_DIR"
 mkdir -p "$APP_DIR/Contents/MacOS"
 mkdir -p "$APP_DIR/Contents/Resources"
 
-# Launcher script (unquoted heredoc so $PROJECT_DIR expands)
+# Launcher script (unquoted heredoc so variables expand)
+UV_PATH="$(which uv)"
 cat > "$APP_DIR/Contents/MacOS/$APP_NAME" << LAUNCHER
 #!/bin/bash
 cd "$PROJECT_DIR"
-exec uv run python app.py
+exec "$UV_PATH" run python app.py
 LAUNCHER
 chmod +x "$APP_DIR/Contents/MacOS/$APP_NAME"
 
