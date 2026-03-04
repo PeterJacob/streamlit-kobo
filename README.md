@@ -7,8 +7,10 @@ A Streamlit app to aid language learning by bridging your Kobo e-reader, DeepL, 
 ## Project structure
 
 ```
+app.py                         # Native desktop launcher (PyWebView)
 main.py                        # Streamlit app (UI and orchestration)
 anki_export.py                 # AnkiConnect integration
+setup_py2app.py                # py2app bundling config
 kobo_date.txt                  # Timestamp of last successful export
 .streamlit/secrets.toml        # API keys and config (not in repo)
 .streamlit/secrets.toml.example  # Template for secrets.toml
@@ -57,15 +59,33 @@ tts_output/                    # Generated MP3 files (not in repo)
    - **macOS:** `~/Library/Application Support/Kobo/Kobo Desktop Edition/Kobo.sqlite`
    - **Windows:** `%APPDATA%\Kobo\Kobo Desktop Edition\Kobo.sqlite`
 
-4. Run the app:
+4. Run the app as a native desktop window:
+   ```
+   uv run python app.py
+   ```
+
+   Or run as a regular Streamlit app in the browser:
    ```
    uv run streamlit run main.py
    ```
 
+## Building a .app bundle (macOS)
+
+To create a standalone `.app` you can put in your Applications folder or Dock:
+
+```
+uv pip install py2app
+python setup_py2app.py py2app
+```
+
+The `.app` bundle will be created in the `dist/` directory.
+
+To add a custom icon, place an `icon.icns` file in the project root and uncomment the `iconfile` line in `setup_py2app.py`.
+
 ## Usage
 
 1. Make sure Anki is open with AnkiConnect running.
-2. Open the app in your browser (Streamlit will print the URL).
+2. Launch the app (double-click the `.app` bundle, or run `uv run python app.py`).
 3. The "Highlights since" field is pre-filled with the timestamp of your last export. Adjust if needed.
 4. Click **Load Kobo Highlights** to fetch and translate your recent highlights.
 5. Review, edit, or remove sentences as needed.

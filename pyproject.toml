@@ -1,11 +1,15 @@
 [project]
 name = "streamlit-kobo"
 version = "0.1.0"
-description = "Add your description here"
+description = "Convert Kobo e-reader highlights into Anki flashcards with Dutch translations and TTS audio"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "streamlit",
     "deepl",
     "elevenlabs",
+    "pywebview",
 ]
+
+[project.optional-dependencies]
+bundle = ["py2app"]
